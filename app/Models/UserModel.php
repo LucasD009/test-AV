@@ -1,36 +1,54 @@
 <?php
 
-class User_model extends CI_Model {
+namespace App\Models; 
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->database();
-    }
+use CodeIgniter\Model;
+
+class UserModel extends Model
+{
+    protected $table      = 'users'; 
+    protected $primaryKey = 'id'; 
+
+    protected $allowedFields = ['first_name', 'last_name', 'email', 'phone', 'postal_address', 'professional_status', 'last_login']; 
+    
+    protected $returnType     = 'array'; 
+    protected $useTimestamps = false; 
 
     // Create
-    public function create_user($data)
+    public function createUser($data)
     {
-        return $this->db->insert('users', $data);
+        return $this->insert($data);
     }
 
-    // Get
-    public function get_user($id)
+    // Get all
+    public function getAllUsers()
     {
-        $query = $this->db->get_where('users', array('id' => $id));
-        return $query->row_array();
+        return $this->findAll(); # TODO Pagination
+    }
+
+    // Get one by id
+    public function getUserById($id)
+    {
+        return $this->asArray()->where(['id' => $id])->first();
     }
 
     // Update
-    public function update_user($id, $data)
+    public function updateUser($id, $data)
     {
-        $this->db->where('id', $id);
-        return $this->db->update('users', $data);
+        return $this->update($id, $data);
     }
 
     // Delete
-    public function delete_user($id)
+    public function deleteUser($id)
     {
-        return $this->db->delete('users', array('id' => $id));
+        return $this->delete($id);
+    }
+
+    // Delete inactive users
+    public function deleteInactiveUsers($months)
+    {
+        $limitDate = date('Y-m-d H:i:s', strtotime("-{$months} months"));
+        $this->where('last_login <', $limitDate);
+        return $this->delete();
     }
 }
