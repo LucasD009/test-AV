@@ -12,4 +12,3 @@ $routes->get('/users', 'UserController::getAllUsers');
 $routes->get('/user/(:num)', 'UserController::getUserById/$1');
 $routes->put('/user/(:num)', 'UserController::updateUser/$1');
 $routes->delete('/user/(:num)', 'UserController::deleteUser/$1');
-$routes->delete('/inactivesUsers', 'BatchController::deleteInactiveUsers');

@@ -15,6 +15,5 @@ class BatchController extends BaseController {
     {
         $months = 36;
         $this->userModel->deleteInactiveUsers($months);
-        echo "Les utilisateurs inactifs ont été supprimés.\n";
     }
 }
