@@ -41,5 +41,5 @@ La documentation API et Batch se trouve dans le fichier `Documentation.md`. J'ai
 Jeudi après-midi : 1h pour découvrir CodeIgniter et démarrer le projet
 Vendredi matin : 1h pour configurer mon docker et avoir une page de démarrage qui fonctionne ainsi que commencer à voir comment marchent les migrations sur CI
 
-Lundi matin (3h) : Création de la migration, des seeds. Créations de l'API et des routes.
-Lundi après midi (2h): DocApi, ajustements et script démarrage (1h) puis recherche de comment optimiser la pagination (1h)
+Lundi matin (3h) : Création de la migration et des seeds. (1h avec compris le temps de voir le fonctionnement). Créations de l'API, des routes et du batch (2h avec les ajustements).
+Lundi après midi (2h): DocApi, ajustements et script démarrage (1h) puis recherche de comment optimiser la pagination + ajustement readme (1h)
