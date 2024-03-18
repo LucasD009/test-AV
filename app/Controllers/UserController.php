@@ -26,12 +26,7 @@ class UserController extends BaseController {
         $users = $this->userModel->getAllUsers();
     
         if ($users) {
-
-            $data = [
-                'users' => $users,
-                'pager' => $$this->userModel->pager,
-            ];
-            return $this->response->setJSON($data);
+            return $this->response->setJSON($users);
         } else {
             return $this->response->setStatusCode(404, 'Utilisateurs non trouvés');
         }
