@@ -23,22 +23,22 @@
 - **Réponse réussie :** Code d'état 200 avec message "Utilisateur créé avec succès."
 
 #### Récupérer tous les Utilisateurs
-- **URL :** /users
-- **Méthode :** GET
+- **URL :** `/users`
+- **Méthode :** `GET`
 - **Réponse réussie :** Code d'état 200 avec un tableau d'utilisateurs.
 - **Réponse d'erreur :** Code d'état 404 avec message "Utilisateurs non trouvés" si l'utilisateur n'existe pas.
 
 #### Récupérer un Utilisateur par ID
-- **URL :** /user/{id}
-- **Méthode :** GET
-- **Paramètres d'URL :** id=[integer]
+- **URL :** `/user/{id}`
+- **Méthode :** `GET`
+- **Paramètres d'URL :** `id=[integer]`
 - **Réponse réussie :** Code d'état 200 avec les détails de l'utilisateur.
 - **Réponse d'erreur :** Code d'état 404 avec message "Utilisateur non trouvé" si l'utilisateur n'existe pas.
 
 #### Mettre à Jour un Utilisateur
-- **URL :** /user/{id}
-- **Méthode :** PUT
-- **Paramètres d'URL :** id=[integer]
+- **URL :** `/user/{id}`
+- **Méthode :** `PUT`
+- **Paramètres d'URL :** `id=[integer]`
 - **Corps de la requête (exemple) :**
 
     json :
@@ -54,9 +54,9 @@
 - **Réponse réussie :** Code d'état 200 avec message "Utilisateur mis à jour avec succès."
 
 #### Supprimer un Utilisateur
-- **URL :** /user/{id}
+- **URL :** `/user/{id}`
 - **Méthode :** DELETE
-- **Paramètres d'URL :** id=[integer]
+- **Paramètres d'URL :** `id=[integer]`
 - **Réponse réussie :** Code d'état 200 avec message "Utilisateur supprimé avec succès."
 
 

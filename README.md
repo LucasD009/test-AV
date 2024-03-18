@@ -11,7 +11,18 @@ Et ça a l’air un peu plus galère a setup par rapport à PHP mais je vais fai
 Ça me permettra aussi d’avoir un environnement iso entre le local et CC mais aussi de permettre à n’importe qui récupérant le projet de le lancer plus rapidement avec le bon environnement.
 Et donc pour le moment je laisse cette partie de coté. Par contre en local je vais utiliser docker-compose et la doc de CC me dit « Docker Compose functionalities are not supported. » donc j’aurais ça à gérer pour le déploiement car chaque partie sera déployée de son coté.
 
+# Environement de dev
+
 Pour travailler j'utilise Docker, Visual Studio Code, SourceTree, DBeaver (BDD), ITerm (terminal) et Postman
+
+# Conception : 
+
+- **Récupération d’une liste paginée d’utilisateurs (potentiellement 5M d’entrées)**
+Visiblement CI récupère toutes les données pour ensuite les paginer ce qui va poser un soucis de performance sur de gros volumes.
+Pour palier à ça je pourrais utiliser un curseur pour parcourir la table et ne retourner une à une que les pages demandées. Mais il serait alors plus compliqué de se rendre à une page précise et donc d'afficher le nombre de page en bas de l'écran pour l'utilisateur. Dans mon cas j'ai préféré ne rien faire pour avoir une pagination qui fonctionne avec des soucis de performances plutôt que quelque chose de bancal. N'ayant pas de WHERE dans ma requète c'est déjà un point ne ralentissant pas la requète.
+
+- **Le listing et la suppression seront utilisées via un BO et la création et modification via le FO.**
+Niveau sécurité ce n'est pas l'idéal de mettre les quatres méthodes sur la même route "user". Toutefois ne conaissant pas le contexte métier de ce test et si cela peut vraiment engendrer des soucis j'ai fait le choix pour plus de praticité ici de laisser toutes les requètes sur la même route.
 
 ## BDD
 
@@ -19,85 +30,14 @@ J'ai choisi de créer des seeds pour ma base pour facilter mes tests. Et je fera
 
 Pour le numéro de téléphone il n'y a pas de contrainte d'unicité ici pour facilité le peuplement auto de la base mais dans un contexte métier c'est, en géneral, nécéssaire.
 
+## Documentation
 
-## Temps passé :
+La documentation API et Batch se trouve dans le fichier `Documentation.md`. J'ai hésité à utiliser swagger mais vu la taille de la doc il était plus rapide de faire ça à la main ici.
+
+## Temps passé 
 
 Jeudi après-midi : 1h pour découvrir CodeIgniter et démarrer le projet
 Vendredi matin : 1h pour configurer mon docker et avoir une page de démarrage qui fonctionne ainsi que commencer à voir comment marchent les migrations sur CI
 
-Lundi matin : Création de la migration, des seeds et découverte du fonctionnement des routes sur CI. Créations des routes (non terminé).
-
-
-
-
-
-# INIT CI REAMDE :
-
-# CodeIgniter 4 Application Starter
-
-## What is CodeIgniter?
-
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
-
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
-
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
-
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
-
-## Installation & updates
-
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
-
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
-
-## Setup
-
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
-
-## Important Change with index.php
-
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> The end of life date for PHP 7.4 was November 28, 2022.
-> The end of life date for PHP 8.0 was November 26, 2023.
-> If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> The end of life date for PHP 8.1 will be November 25, 2024.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Lundi matin (3h) : Création de la migration, des seeds. Créations de l'API et des routes.
+Lundi après midi (2h): DocApi, ajustements et script démarrage (1h) puis recherche de comment optimiser la pagination (1h)
