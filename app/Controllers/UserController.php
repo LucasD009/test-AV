@@ -14,7 +14,7 @@ class UserController extends BaseController {
     public function createUser()
     {
         $data = $this->request->getPost();
-        if($this->userModel->create_user($data)) {
+        if($this->userModel->createUser($data)) {
             echo "Utilisateur créé avec succès.";
         } else {
             echo "Erreur lors de la création de l'utilisateur.";
@@ -24,10 +24,13 @@ class UserController extends BaseController {
     public function getAllUsers()
     {
         $users = $this->userModel->getAllUsers();
+
+        $pager = $this->userModel->pager;
+    
         if ($users) {
             return $this->response->setJSON($users);
         } else {
-            return $this->response->setStatusCode(404, 'Utilisateur non trouvé');
+            return $this->response->setStatusCode(404, 'Utilisateurs non trouvés');
         }
     }
 
@@ -58,11 +61,5 @@ class UserController extends BaseController {
         } else {
             echo "Erreur lors de la suppression de l'utilisateur.";
         }
-    }
-
-    public function deleteInactiveUsers()
-    {
-        $this->userModel->deleteInactiveUsers(36); // 36 months
-        echo "Les utilisateurs inactifs ont été supprimés.\n";
     }
 }

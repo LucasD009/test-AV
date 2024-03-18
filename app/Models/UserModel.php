@@ -23,7 +23,8 @@ class UserModel extends Model
     // Get all
     public function getAllUsers()
     {
-        return $this->findAll(); # TODO Pagination
+        $perPage = 10;
+        return $this->paginate($perPage);
     }
 
     // Get one by id
