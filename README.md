@@ -1,21 +1,23 @@
-# test-DC
+# test-AV
 
 ## Installation du projet
 Lancer le script start.sh dispo dans back-DC : `./start.sh`
 
 ## Réalisation du test
 
-Pour commencer je découvre CodeIgniter via la doc et ensuite comme le choix des technos et d'archi sont imposés j’anticipe pour le déploiement pour pas que ça me pose de soucis une fois le projet terminé.
+Pour commencer je découvre CodeIgniter via la doc et ensuite comme le choix des technos et d'archi sont imposés j’anticipe pour le déploiement afin que cela ne me pose de soucis une fois le projet developpé.
 Comme je connais déjà un peu Clever Cloud je vais partir là dessus pour héberger.
-Et ça a l’air un peu plus galère a setup par rapport à PHP mais je vais faire un déploiement via docker dans CC. 
-Ça me permettra aussi d’avoir un environnement iso entre le local et CC mais aussi de permettre à n’importe qui récupérant le projet de le lancer plus rapidement avec le bon environnement.
-Et donc pour le moment je laisse cette partie de coté. Par contre en local je vais utiliser docker-compose et la doc de CC me dit « Docker Compose functionalities are not supported. » donc j’aurais ça à gérer pour le déploiement car chaque partie sera déployée de son coté.
+Et ça a l’air un peu plus galère à setup par rapport à PHP mais je vais donc faire un déploiement via docker dans CC. 
+Cela me permettra aussi d’avoir un environnement iso entre le local et CC. Mais aussi de permettre à n’importe qui récupérant le projet de le lancer plus rapidement avec le bon environnement.
+Et donc pour le moment je laisse cette partie de coté. Par contre en local je vais utiliser docker-compose et la doc de CC me dit « Docker Compose functionalities are not supported. » donc j’aurais ça à gérer pour le déploiement.
 
 # Environement de dev
 
 Pour travailler j'utilise Docker, Visual Studio Code, SourceTree, DBeaver (BDD), ITerm (terminal) et Postman
 
 # Conception : 
+
+Je relève deux points pendant la conception de ce test :
 
 - **Récupération d’une liste paginée d’utilisateurs (potentiellement 5M d’entrées)**
 Visiblement CI récupère toutes les données pour ensuite les paginer ce qui va poser un soucis de performance sur de gros volumes.
@@ -26,9 +28,9 @@ Niveau sécurité ce n'est pas l'idéal de mettre les quatres méthodes sur la m
 
 ## BDD
 
-J'ai choisi de créer des seeds pour ma base pour facilter mes tests. Et je ferais un script permettant de lancer le projet rapidement pour le tester et ces données seront donc utiles pour peupler la base.
+J'ai choisi de créer des seeds pour ma base pour facilter mes tests. Je ferai un script permettant de lancer le projet rapidement pour le tester et ces données seront alors utiles pour peupler la base. Niveau temps ce n'est pas très couteux et celà me permettra de rendre un projet plus propre.
 
-Pour le numéro de téléphone il n'y a pas de contrainte d'unicité ici pour facilité le peuplement auto de la base mais dans un contexte métier c'est, en géneral, nécéssaire.
+Pour le numéro de téléphone il n'y a pas de contrainte d'unicité ici pour faciliter le peuplement auto de la base mais dans un contexte métier c'est, en géneral, nécéssaire.
 
 ## Documentation
 
